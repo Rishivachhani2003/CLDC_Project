@@ -1,20 +1,6 @@
 import 'package:flutter/material.dart';
-import 'dart:math';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
+class AssignTaskPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,6 +47,7 @@ class MyHomePage extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(height: 10),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: TextField(
@@ -82,6 +69,7 @@ class MyHomePage extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(height: 10),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: TextField(
@@ -103,6 +91,7 @@ class MyHomePage extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(height: 10),
             Row(
               children: [
                 Expanded(
