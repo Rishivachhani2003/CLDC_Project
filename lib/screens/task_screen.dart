@@ -33,9 +33,14 @@ class _task_screenState extends State<task_screen> {
         title: Text('Your Tasks', style: TextStyle(color: Colors.white)),
         actions: [
           IconButton(
-            icon: Icon(Icons.menu),
+            icon: Icon(
+              Icons.menu,
+              color: Colors.white,
+            ),
             onPressed: () {
-              // Open the side drawer or handle the menu action
+              _openDrawer(context);
+              // Handle the menu button press here
+              // For example, show a drawer or navigate to a menu screen
             },
           ),
         ],
@@ -150,4 +155,57 @@ class _task_screenState extends State<task_screen> {
       ),
     );
   }
+}
+
+// Function to open the custom drawer
+void _openDrawer(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    backgroundColor: Colors.transparent,
+    builder: (BuildContext context) {
+      return Container(
+        height: 200, // Set the desired height of the drawer
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        decoration: BoxDecoration(
+          color: const Color.fromRGBO(33, 36, 40, 1.000),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 20),
+            // Add the "Assign Task" option
+            ListTile(
+              title: Text(
+                "Assign Task",
+                style: TextStyle(color: Colors.white),
+              ),
+              onTap: () {
+                // Implement the functionality for "Assign Task" here
+                // For example, you can navigate to another screen
+                Navigator.pop(context); // Close the drawer
+              },
+            ),
+            // Add the line between the options
+            Divider(
+              height: 1,
+              color: Colors.grey,
+            ),
+            // Add the "Your Task" option
+            ListTile(
+              title: Text(
+                "Your Task",
+                style: TextStyle(color: Colors.white),
+              ),
+              onTap: () {
+                // Implement the functionality for "Your Task" here
+                // For example, you can navigate to another screen
+                Navigator.pop(context); // Close the drawer
+              },
+            ),
+          ],
+        ),
+      );
+    },
+  );
 }
