@@ -1,6 +1,7 @@
+import 'package:cldc/screens/task_screen.dart';
 import 'package:flutter/material.dart';
 
-class AssignTaskPage extends StatelessWidget {
+class assign_task extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -197,9 +198,13 @@ void _openDrawer(BuildContext context) {
                 style: TextStyle(color: Colors.white),
               ),
               onTap: () {
-                // Implement the functionality for "Your Task" here
-                // For example, you can navigate to another screen
-                Navigator.pop(context); // Close the drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        task_screen(), // Replace with the actual name of your task_screen widget
+                  ),
+                );
               },
             ),
           ],
