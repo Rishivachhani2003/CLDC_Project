@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:cldc/screens/assign_task.dart';
 
 class Task {
   String title;
@@ -181,9 +182,13 @@ void _openDrawer(BuildContext context) {
                 style: TextStyle(color: Colors.white),
               ),
               onTap: () {
-                // Implement the functionality for "Assign Task" here
-                // For example, you can navigate to another screen
-                Navigator.pop(context); // Close the drawer
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        assign_task(), // Replace with the actual name of your task_screen widget
+                  ),
+                );
               },
             ),
             // Add the line between the options
