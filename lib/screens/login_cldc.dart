@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cldc/screens/task_screen.dart';
 
 class login_cldc extends StatefulWidget {
   const login_cldc({super.key});
@@ -116,6 +117,14 @@ class _login_cldc extends State<login_cldc> {
                         ),
                         onPressed: () {
                           // Implement your login logic here
+                          // Navigate to the task_screen when the login button is pressed
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  task_screen(), // Replace with the actual name of your task_screen widget
+                            ),
+                          );
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
