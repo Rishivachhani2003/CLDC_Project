@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cldc/screens/task_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class login_cldc extends StatefulWidget {
   const login_cldc({super.key});
@@ -12,6 +13,7 @@ class _login_cldc extends State<login_cldc> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool _obscureText = true; // Variable to control password visibility
+  String _authMessage = ''; // To display authentication status
 
   @override
   Widget build(BuildContext context) {
@@ -115,19 +117,10 @@ class _login_cldc extends State<login_cldc> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 40, vertical: 16),
                         ),
-                        onPressed: () {
-                          // Implement your login logic here
-                          // Navigate to the task_screen when the login button is pressed
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  task_screen(), // Replace with the actual name of your task_screen widget
-                            ),
-                          );
-                        },
+                        onPressed: _signInWithEmailAndPassword,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment
+                              .center, //Call the email authentication function
                           children: [
                             Text(
                               'Login',
@@ -136,7 +129,6 @@ class _login_cldc extends State<login_cldc> {
                                   fontWeight: FontWeight.bold,
                                   backgroundColor: Colors.blue),
                             ),
-
                             SizedBox(
                                 width:
                                     10), // Add space between the text and arrow image
@@ -159,5 +151,45 @@ class _login_cldc extends State<login_cldc> {
         ),
       ),
     );
+  }
+
+  // Function for email authentication
+  Future<void> _signInWithEmailAndPassword() async {
+    try {
+      final String email = emailController.text.trim();
+      final String password = passwordController.text.trim();
+
+      if (email.isEmpty || password.isEmpty) {
+        // Display an error if email or password is empty
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Please enter email and password.')),
+        );
+        return;
+      }
+
+      // Authenticate the user using email and password
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+
+      // If authentication is successful, navigate to the task_screen
+      if (userCredential.user != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => task_screen(),
+          ),
+        );
+      } else {
+        // Handle login failure
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Login failed. Please try again.')),
+        );
+      }
+    } catch (e) {
+      // Handle any errors that occur during authentication
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: $e')),
+      );
+    }
   }
 }
